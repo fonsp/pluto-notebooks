@@ -1,38 +1,53 @@
 ### A Pluto.jl notebook ###
-# v0.9.9
+# v0.11.12
 
 using Markdown
+using InteractiveUtils
+
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
     quote
         local el = $(esc(element))
-        global $(esc(def)) = Core.applicable(Base.peek, el) ? Base.peek(el) : missing
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : missing
         el
     end
 end
 
+# ╔═╡ c58752e4-f038-11ea-0726-f98f4287c9f4
+md"# Welcome to binder!!"
+
+# ╔═╡ cedf86e2-f038-11ea-02cb-3dd74aa19a90
+md"To get packages inside binder - use `Pkg`!"
+
+# ╔═╡ e018ea70-f038-11ea-000b-bde5d95e1aa7
+md"_We set up a new environment for this notebook_"
+
+# ╔═╡ e814a124-f038-11ea-3b22-f109c99dbe03
+begin
+	import Pkg
+	Pkg.activate(mktempdir())
+end
+
+# ╔═╡ ee46ae34-f038-11ea-39b4-9da6d45d57a7
+begin
+	Pkg.add("PlutoUI")
+	using PlutoUI
+end
+
 # ╔═╡ 70160fec-b0c7-11ea-0c2a-35418346592e
-@bind angle HTML("<input type='range' min='0' step='$(pi/100)' max='$(pi/2)'>")
-
-# ╔═╡ 5f117a7a-b3dc-11ea-29d3-6b094f1a2a29
-@bind star_size HTML("<input type='range' min='0' step='1' max='100'>")
-
-# ╔═╡ 8c88639c-b3dc-11ea-2711-135dad6f2f11
-@bind star_points HTML("<input type='range' min='1' step='1' max='20'>")
+@bind angle Slider(0:pi/100:pi/2; default=pi/5)
 
 # ╔═╡ b3f5877c-b3e9-11ea-03fe-3f3233ee2e1b
 @bind GO_mondriaan html"<button>GO!!</button>"
 
 # ╔═╡ 4c1bcc58-b3ec-11ea-32d1-7f4cd113e43d
-@bind fractal_angle HTML("<input type='range' min='0' step='0.01' max='0.5'>")
+@bind fractal_angle Slider(0:0.01:0.5)
 
 # ╔═╡ a7e725d8-b3ee-11ea-0b84-8d252979e4ef
-@bind fractal_tilt HTML("<input type='range' min='0' step='0.01' max='0.5'>")
+@bind fractal_tilt Slider(0:0.01:0.5)
 
 # ╔═╡ 49ce3f9c-b3ee-11ea-0bb5-ed348475ea0b
-@bind fractal_base HTML("<input type='range' min='0' step='0.01' max='1'>")
-
-# ╔═╡ 146cdee0-b3ed-11ea-23c6-13bbfae43018
-
+@bind fractal_base Slider(0:0.01:1)
 
 # ╔═╡ ab083f08-b0c0-11ea-0c23-315c14607f1f
 md"# 🐢 definition"
@@ -260,21 +275,23 @@ fractal = turtle_drawing() do t
 end
 
 # ╔═╡ Cell order:
+# ╟─c58752e4-f038-11ea-0726-f98f4287c9f4
+# ╟─cedf86e2-f038-11ea-02cb-3dd74aa19a90
+# ╠═e018ea70-f038-11ea-000b-bde5d95e1aa7
+# ╠═e814a124-f038-11ea-3b22-f109c99dbe03
+# ╠═ee46ae34-f038-11ea-39b4-9da6d45d57a7
 # ╠═70160fec-b0c7-11ea-0c2a-35418346592e
 # ╠═d30c8f2a-b0bf-11ea-0557-19bb61118644
-# ╠═5f117a7a-b3dc-11ea-29d3-6b094f1a2a29
-# ╠═8c88639c-b3dc-11ea-2711-135dad6f2f11
 # ╠═d88440c2-b3dc-11ea-1944-0ba4a566d7c1
 # ╠═9dc072fe-b3db-11ea-1568-857a664ce4d2
-# ╠═678850cc-b3e4-11ea-3cf0-a3445a3ac15a
 # ╟─b3f5877c-b3e9-11ea-03fe-3f3233ee2e1b
 # ╠═e04a9296-b3e3-11ea-01b5-8ff7dc0ced56
+# ╠═678850cc-b3e4-11ea-3cf0-a3445a3ac15a
 # ╠═4c1bcc58-b3ec-11ea-32d1-7f4cd113e43d
 # ╠═a7e725d8-b3ee-11ea-0b84-8d252979e4ef
 # ╠═49ce3f9c-b3ee-11ea-0bb5-ed348475ea0b
 # ╠═60b52a52-b3eb-11ea-2e3c-9d185f4fbc2b
 # ╠═d1ae2696-b3eb-11ea-2fcc-07b842217994
-# ╠═146cdee0-b3ed-11ea-23c6-13bbfae43018
 # ╟─ab083f08-b0c0-11ea-0c23-315c14607f1f
 # ╠═6bbb674c-b0ba-11ea-2ff7-ebcde6573d5b
 # ╠═310a0c52-b0bf-11ea-3e32-69d685f2f45e
